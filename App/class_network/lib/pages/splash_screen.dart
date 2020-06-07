@@ -1,4 +1,5 @@
 import 'package:class_network/pages/login_page.dart';
+import 'package:class_network/widgets/icon_cn.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     super.initState();
     Future.delayed(
       Duration(
-        seconds: 3,
+        seconds: 2,
       ),
       () {
         Navigator.pushReplacement(
@@ -38,21 +39,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
           SizedBox(
             height: 20.0,
           ),
-          Center(
-            child: Hero(
-              child: ClipRRect(
-                child: Image.asset(
-                  'assets/images/icon.png',
-                  scale: 6,
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20.0),
-                ),
-              ),
-              tag: 'IconApp',
-              transitionOnUserGestures: true,
-            ),
-          ),
+          IconWidget_CN(),
           SizedBox(
             height: 20.0,
           ),
