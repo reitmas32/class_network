@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 class TextField_CN extends StatelessWidget {
   final String label;
+  final Icon prefixIcon;
+  final bool obscureText;
   const TextField_CN({
     Key key,
     this.label,
+    this.prefixIcon,
+    this.obscureText = false,
     @required this.textEditingController,
   }) : super(key: key);
 
@@ -17,9 +21,11 @@ class TextField_CN extends StatelessWidget {
       child: TextFormField(
         controller: textEditingController,
         style: TextStyle(color: Colors.black, fontSize: 20.0),
+        obscureText: obscureText,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
+          prefixIcon: prefixIcon,
           labelText: label,
           labelStyle: TextStyle(color: Colors.blueAccent, fontSize: 25.0),
           focusedBorder: OutlineInputBorder(

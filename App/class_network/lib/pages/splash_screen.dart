@@ -1,6 +1,7 @@
 import 'package:class_network/pages/login_page.dart';
 import 'package:class_network/widgets/icon_cn.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({
@@ -14,6 +15,10 @@ class SplashScreenPage extends StatefulWidget {
 class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     super.initState();
     Future.delayed(
       Duration(
