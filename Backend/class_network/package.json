@@ -1,0 +1,26 @@
+{
+  "name": "class_network",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --out-dir dist",
+    "dev": "nodemon src/index.js --exec babel-node",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/node": "^7.10.1",
+    "@babel/polyfill": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "D": "^1.0.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.8",
+    "nodemon": "^2.0.4"
+  }
+}
