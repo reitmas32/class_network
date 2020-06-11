@@ -2,15 +2,15 @@ class User {
   String userName;
   String email;
   String password;
-  String _id;
+  String id;
 
-  User({this.userName, this.password, this.email});
+  User({this.userName, this.password, this.email, this.id});
 
   User.fromJSON(Map<String, dynamic> json) {
     this.userName = json['userName'];
     this.password = json['password'];
     this.email = json['email'];
-    this._id = json[_id];
+    this.id = json['_id'];
   }
 
   Map<String, dynamic> toJSON() {
@@ -18,7 +18,7 @@ class User {
       'userName': this.userName,
       'password': this.password,
       'email': this.email,
-      '_id': this._id,
+      '_id': this.id,
     };
   }
 }
