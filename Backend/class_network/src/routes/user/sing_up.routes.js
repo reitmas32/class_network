@@ -29,6 +29,10 @@ router.post("/", async (req, res) => {
 
     //Si salio satisfactoriamente la insercion
     if ((await result).ops.length != 0) {
+      //Insertamos un dato en la base de datos de las sesiones
+      const resultSesion = await db
+        .collection("sesions")
+        .insertOne({ _userID: result.ops[0]._id, sesion: false });
 
       //Mensaje
       console.log("<- DATA BASE ->: Nuevo Usuario _id: " + result.ops[0]._id);
@@ -54,9 +58,7 @@ router.delete("/delete", async (req, res) => {
   const id = req.body._id;
 
   //Eliminamos al ususario
-  const result = await db
-    .collection("users")
-    .deleteOne({ _id: ObjectID(id) });
+  const result = await db.collection("users").deleteOne({ _id: ObjectID(id) });
 
   //Resultado de  la eliminacion
   res.json(result);
