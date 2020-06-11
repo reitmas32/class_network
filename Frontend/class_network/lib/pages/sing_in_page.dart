@@ -2,7 +2,6 @@ import 'package:class_network/widgets/app_bar_cn.dart';
 import 'package:class_network/widgets/raised_button_cn.dart';
 import 'package:class_network/widgets/text_field_cn.dart';
 import 'package:flutter/services.dart';
-import 'package:scroll_app_bar/scroll_app_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:math';
