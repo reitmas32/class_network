@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TextField_CN extends StatelessWidget {
+class TextField_CN extends StatefulWidget {
   final String label;
   final Icon prefixIcon;
   final bool obscureText;
@@ -15,18 +15,40 @@ class TextField_CN extends StatelessWidget {
   final TextEditingController textEditingController;
 
   @override
+  _TextField_CNState createState() => _TextField_CNState();
+}
+
+class _TextField_CNState extends State<TextField_CN> {
+
+  bool obscureText;
+
+  @override
+  void initState() {
+    obscureText = widget.obscureText;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width / 1.5,
       child: TextFormField(
-        controller: textEditingController,
+        controller: widget.textEditingController,
         style: TextStyle(color: Colors.black, fontSize: 20.0),
         obscureText: obscureText,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
-          prefixIcon: prefixIcon,
-          labelText: label,
+          prefixIcon: widget.prefixIcon,
+          labelText: widget.label,
+          suffixIcon: widget.obscureText ? IconButton(
+            icon: Icon(Icons.remove_red_eye),
+            onPressed: () {
+              setState(() {
+                obscureText = !obscureText;
+              });
+            },
+          ) : null,
           labelStyle: TextStyle(color: Colors.blueAccent, fontSize: 25.0),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.0),
@@ -39,7 +61,6 @@ class TextField_CN extends StatelessWidget {
             borderRadius: BorderRadius.circular(25.0),
             borderSide: BorderSide(),
           ),
-
         ),
       ),
     );
