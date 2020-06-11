@@ -1,8 +1,15 @@
+import 'package:class_network/models/user_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'package:class_network/widgets/icon_cn.dart';
 import 'package:class_network/widgets/raised_button_cn.dart';
 import 'package:class_network/widgets/text_field_cn.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+//TODO:Eliminar antes de prduccion
+import 'package:class_network/database/database.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -34,6 +41,21 @@ class _LoginPageState extends State<LoginPage> {
     passwordController.dispose();
     controllerScrollView.dispose();
     super.dispose();
+  }
+
+  Future<User> _login() async {
+    http.Response result = await http.put(
+      'http://192.168.100.119:3000/api/user/login',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        'userName': userNameController.text,
+        'password': passwordController.text,
+      }),
+    );
+    User user = User.fromJSON(jsonDecode(result.body));
+    return user;
   }
 
   @override
@@ -70,11 +92,17 @@ class _LoginPageState extends State<LoginPage> {
                       TextField_CN(
                         textEditingController: passwordController,
                         label: 'Password',
+                        obscureText: true,
                       ),
                       RaisedButton_CN(
                         label: 'Ingresar',
                         color: Colors.pinkAccent[400],
-                        onPressed: () {},
+                        onPressed: () async {
+                          //TODO: User user = await _login();
+                          print(passwordController.text);
+                          User user = await DB.createUser();
+                          Navigator.of(context).pushReplacementNamed('/InboxPage', arguments: user);
+                        },
                       ),
                       RaisedButton_CN(
                         label: 'Registrate',
