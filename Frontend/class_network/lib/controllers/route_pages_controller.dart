@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:class_network/pages/splash_screen.dart';
 import 'package:class_network/pages/login_page.dart';
 import 'package:class_network/pages/sing_in_page.dart';
+import 'package:class_network/pages/inbox_page.dart';
 
 ///Metodo que almacena las rutas de la App
 class RoutePagesController {
@@ -12,6 +13,7 @@ class RoutePagesController {
       '/SplashScreenPage': (context) => SplashScreenPage(),
       '/LoginPage': (context) => LoginPage(),
       '/SingInPage': (context) => SingInPage(),
+      '/InboxPage': (context) => InboxPage(),
     };
   }
 }
