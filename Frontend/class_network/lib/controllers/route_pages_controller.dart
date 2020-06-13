@@ -6,6 +6,9 @@ import 'package:class_network/pages/login_page.dart';
 import 'package:class_network/pages/sing_in_page.dart';
 import 'package:class_network/pages/inbox_page.dart';
 
+//Page Test
+import 'package:class_network/pages/admob_test.dart';
+
 ///Metodo que almacena las rutas de la App
 class RoutePagesController {
   static Map<String, WidgetBuilder> getRoutes(BuildContext context) {
@@ -14,6 +17,7 @@ class RoutePagesController {
       '/LoginPage': (context) => LoginPage(),
       '/SingInPage': (context) => SingInPage(),
       '/InboxPage': (context) => InboxPage(),
+      '/test/AdMobTest': (context) => AdMobTest(),
     };
   }
 }

@@ -12,7 +12,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: RoutePagesController.getRoutes(context),
-      initialRoute: '/SplashScreenPage',
+      initialRoute: '/test/AdMobTest',
     );
   }
 }
