@@ -1,3 +1,4 @@
+import 'package:class_network/util/languge.dart';
 import 'package:class_network/widgets/app_bar_cn.dart';
 import 'package:class_network/widgets/subject_card.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +25,13 @@ class _InboxPageState extends State<InboxPage> {
       body: Center(
           child: CustomScrollView(
         slivers: [
-          SliverApBar_CN(
-            text: 'Sing Up',
+          SliverAppBar_CN(
+            text: ControllerStrings.getStringValue('Subjects'),
             callback: () {
-              Navigator.of(context).pop();
+              //TODO: Aqui va un Menu desplegable
+              print("Menu in Inbox");
             },
+            icon: Icons.menu,
           ),
           SliverList(
             delegate: SliverChildListDelegate([
