@@ -1,23 +1,25 @@
+import 'package:class_network/util/languge.dart';
 import 'package:class_network/widgets/app_bar_cn.dart';
 import 'package:class_network/widgets/raised_button_cn.dart';
 import 'package:class_network/widgets/text_field_cn.dart';
+import 'package:class_network/database/database.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:math';
 
-class SingInPage extends StatefulWidget {
+class SignInPage extends StatefulWidget {
   @override
-  _SingInPageState createState() => _SingInPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _SingInPageState extends State<SingInPage> {
+class _SignInPageState extends State<SignInPage> {
   final controller = ScrollController();
   TextEditingController userNameController;
   TextEditingController emailController;
   TextEditingController passwordController_1;
   TextEditingController passwordController_2;
-  bool flagTerminos;
+  bool flagConditions;
 
   @override
   void initState() {
@@ -29,7 +31,7 @@ class _SingInPageState extends State<SingInPage> {
     emailController = TextEditingController();
     passwordController_1 = TextEditingController();
     passwordController_2 = TextEditingController();
-    flagTerminos = false;
+    flagConditions = false;
     super.initState();
   }
 
@@ -44,16 +46,17 @@ class _SingInPageState extends State<SingInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: CustomScrollView(
+    return Scaffold(
+      body: Builder(
+        builder: (context) => CustomScrollView(
           controller: controller,
           slivers: [
-            SliverApBar_CN(
-              text: 'Sing Up',
+            SliverAppBar_CN(
+              text: ControllerStrings.getStringValue('SignIn'),
               callback: () {
                 Navigator.of(context).pop();
               },
+              icon: Icons.arrow_back,
             ),
             SliverList(
               delegate: sliversTextFieelds(),
@@ -67,16 +70,41 @@ class _SingInPageState extends State<SingInPage> {
                   Row(
                     children: [
                       RaisedButton_CN(
-                        label: 'Cancelar',
+                        label: ControllerStrings.getStringValue('Cancel'),
                         color: Colors.pinkAccent[400],
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                       ),
                       RaisedButton_CN(
-                        label: 'Registrarme',
+                        label: ControllerStrings.getStringValue('SignIn'),
                         color: Colors.blue,
                         onPressed: () {
+                          if (!this.flagConditions) {
+                            final snackBar = SnackBar(
+                              content: Text(ControllerStrings.getStringValue(
+                                  'IDoNotConditions')),
+                              action: SnackBarAction(
+                                label: ControllerStrings.getStringValue(
+                                    'Understand'),
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+                            Scaffold.of(context).showSnackBar(snackBar);
+                            return;
+                          }
+                          if (this.passwordController_1.text ==
+                                  this.passwordController_2.text &&
+                              this.passwordController_1.text != "" &&
+                              this.userNameController.text != "" &&
+                              this.emailController.text != "") {
+                            DB.singIn(
+                                this.userNameController.text,
+                                this.passwordController_1.text,
+                                this.emailController.text);
+                          }
                           //TODO:Validar los datos
                           //Osea solo que los password sean iguales
                           //Y que haceptes los terminos y condiciones
@@ -94,7 +122,6 @@ class _SingInPageState extends State<SingInPage> {
           ],
         ),
       ),
-      debugShowCheckedModeBanner: false,
     );
   }
 
@@ -103,35 +130,39 @@ class _SingInPageState extends State<SingInPage> {
       [
         Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
-          child: Row(
-            children: [
-              Checkbox(
-                value: flagTerminos,
-                onChanged: (bool value) {
-                  setState(() {
-                    flagTerminos = value;
-                  });
-                },
-              ),
-              GestureDetector(
-                child: Text(
-                  'Acepto los Terminos y condiciones',
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.blue[700],
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onTap: () {
-                  //TODO:Enviar a la pagina de los terminos y condiciones
-                  print("Acepto");
-                },
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-          ),
+          child: _buildConditions(),
         )
       ],
+    );
+  }
+
+  Row _buildConditions() {
+    return Row(
+      children: [
+        Checkbox(
+          value: flagConditions,
+          onChanged: (bool value) {
+            setState(() {
+              flagConditions = value;
+            });
+          },
+        ),
+        GestureDetector(
+          child: Text(
+            ControllerStrings.getStringValue('Condition'),
+            style: TextStyle(
+              fontSize: 15.0,
+              color: Colors.blue[700],
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onTap: () {
+            //TODO:Enviar a la pagina de los terminos y condiciones
+            print("Acepto");
+          },
+        ),
+      ],
+      mainAxisAlignment: MainAxisAlignment.center,
     );
   }
 
@@ -153,23 +184,23 @@ class _SingInPageState extends State<SingInPage> {
     return [
       TextField_CN(
         textEditingController: userNameController,
-        label: 'User Name',
+        label: ControllerStrings.getStringValue('UserNameString'),
         prefixIcon: Icon(Icons.person),
       ),
       TextField_CN(
         textEditingController: emailController,
-        label: 'Email',
+        label: ControllerStrings.getStringValue('Email'),
         prefixIcon: Icon(Icons.email),
       ),
       TextField_CN(
         textEditingController: passwordController_1,
-        label: 'Password',
+        label: ControllerStrings.getStringValue('Password'),
         prefixIcon: Icon(Icons.fiber_pin),
         obscureText: true,
       ),
       TextField_CN(
         textEditingController: passwordController_2,
-        label: 'Password',
+        label: ControllerStrings.getStringValue('Password'),
         prefixIcon: Icon(Icons.fiber_pin),
         obscureText: true,
       ),
