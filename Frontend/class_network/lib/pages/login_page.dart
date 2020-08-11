@@ -1,4 +1,5 @@
 import 'package:class_network/models/user_model.dart';
+import 'package:class_network/util/languge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +17,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
+//TODO:Separar el codigo de esta clase
 class _LoginPageState extends State<LoginPage> {
   TextEditingController userNameController;
   TextEditingController passwordController;
@@ -87,28 +89,34 @@ class _LoginPageState extends State<LoginPage> {
                       IconWidget_CN(),
                       TextField_CN(
                         textEditingController: userNameController,
-                        label: 'User Name',
+                        label:
+                            ControllerStrings.getStringValue('UserNameString'),
                       ),
                       TextField_CN(
                         textEditingController: passwordController,
-                        label: 'Password',
+                        label: ControllerStrings.getStringValue('Password'),
                         obscureText: true,
                       ),
                       RaisedButton_CN(
-                        label: 'Ingresar',
+                        label: ControllerStrings.getStringValue('Login'),
                         color: Colors.pinkAccent[400],
                         onPressed: () async {
-                          //TODO: User user = await _login();
-                          print(passwordController.text);
-                          User user = await DB.createUser();
-                          Navigator.of(context).pushReplacementNamed('/InboxPage', arguments: user);
+                          if (await DB.login(this.userNameController.text,
+                                  this.passwordController.text) !=
+                              null) {
+                            print(passwordController.text);
+                            User user;
+                            Navigator.of(context).pushReplacementNamed(
+                                '/InboxPage',
+                                arguments: user);
+                          }
                         },
                       ),
                       RaisedButton_CN(
-                        label: 'Registrate',
+                        label: ControllerStrings.getStringValue('SignIn'),
                         color: Colors.blue,
                         onPressed: () {
-                          Navigator.of(context).pushNamed('/SingInPage');
+                          Navigator.of(context).pushNamed('/SignInPage');
                         },
                       ),
                       Row(
@@ -122,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
                           Text(
-                            'Recordarme',
+                            ControllerStrings.getStringValue('Remember'),
                             style: TextStyle(
                               fontSize: 20.0,
                               color: Colors.black,
