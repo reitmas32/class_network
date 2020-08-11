@@ -12,7 +12,7 @@ class RoutePagesController {
     return {
       '/SplashScreenPage': (context) => SplashScreenPage(),
       '/LoginPage': (context) => LoginPage(),
-      '/SingInPage': (context) => SingInPage(),
+      '/SignInPage': (context) => SignInPage(),
       '/InboxPage': (context) => InboxPage(),
     };
   }
