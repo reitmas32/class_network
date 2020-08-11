@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SliverApBar_CN extends StatelessWidget {
+class SliverAppBar_CN extends StatelessWidget {
   final String text;
   final VoidCallback callback;
+  final IconData icon;
 
-  const SliverApBar_CN({Key key, this.text, this.callback}) : super(key: key);
+  const SliverAppBar_CN({Key key, this.text, this.callback, this.icon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class SliverApBar_CN extends StatelessWidget {
     return [
       IconButton(
         icon: Icon(
-          Icons.arrow_back_ios,
+          this.icon,
           color: Colors.white,
         ),
         onPressed: callback,
