@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class SliverAppBar_CN extends StatelessWidget {
   final String text;
   final VoidCallback callback;
   final IconData icon;
+  final double separation;
 
-  const SliverAppBar_CN({Key key, this.text, this.callback, this.icon})
+  const SliverAppBar_CN(
+      {Key key, this.text, this.callback, this.icon, this.separation = 50.0})
       : super(key: key);
 
   @override
@@ -13,6 +16,7 @@ class SliverAppBar_CN extends StatelessWidget {
     return SliverAppBar(
       expandedHeight: 150,
       floating: true,
+      automaticallyImplyLeading: false,
       flexibleSpace: FlexibleSpaceBar(
         title: Align(
           child: Row(
@@ -46,7 +50,7 @@ class SliverAppBar_CN extends StatelessWidget {
         onPressed: callback,
       ),
       SizedBox(
-        width: 50,
+        width: this.separation,
       ),
       Text(
         text,

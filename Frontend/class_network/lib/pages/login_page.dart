@@ -2,13 +2,12 @@ import 'package:class_network/models/user_model.dart';
 import 'package:class_network/util/languge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 import 'package:class_network/widgets/icon_cn.dart';
 import 'package:class_network/widgets/raised_button_cn.dart';
 import 'package:class_network/widgets/text_field_cn.dart';
 
+// ignore: todo
 //TODO:Eliminar antes de prduccion
 import 'package:class_network/database/database.dart';
 
@@ -17,6 +16,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
+// ignore: todo
 //TODO:Separar el codigo de esta clase
 class _LoginPageState extends State<LoginPage> {
   TextEditingController userNameController;
@@ -43,21 +43,6 @@ class _LoginPageState extends State<LoginPage> {
     passwordController.dispose();
     controllerScrollView.dispose();
     super.dispose();
-  }
-
-  Future<User> _login() async {
-    http.Response result = await http.put(
-      'http://192.168.100.119:3000/api/user/login',
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode({
-        'userName': userNameController.text,
-        'password': passwordController.text,
-      }),
-    );
-    User user = User.fromJSON(jsonDecode(result.body));
-    return user;
   }
 
   @override
@@ -104,10 +89,9 @@ class _LoginPageState extends State<LoginPage> {
                           if (await DB.login(this.userNameController.text,
                                   this.passwordController.text) !=
                               null) {
-                            print(passwordController.text);
                             User user;
                             Navigator.of(context).pushReplacementNamed(
-                                '/InboxPage',
+                                '/AppPage',
                                 arguments: user);
                           }
                         },

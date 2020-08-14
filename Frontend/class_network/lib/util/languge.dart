@@ -18,7 +18,9 @@ class StringsES extends Strings {
       'Email': 'Correo',
       'IDoNotConditions': 'No acepto las Condiciones',
       'Understand': 'Entiendo',
-      'Subjects': 'Materias'
+      'Subjects': 'Materias',
+      //Add Subject
+      'AddSubject': 'Nueva Materia',
     };
   }
 }
@@ -39,7 +41,9 @@ class StringsEN extends Strings {
       'Email': 'Email',
       'IDoNotConditions': 'I do not accept the conditions',
       'Understand': 'Understand',
-      'Subjects': 'Subjects'
+      'Subjects': 'Subjects',
+      //Add Subject
+      'AddSubject': 'Add Subject',
     };
   }
 }

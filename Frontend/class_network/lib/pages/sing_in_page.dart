@@ -6,8 +6,6 @@ import 'package:class_network/database/database.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
-import 'dart:math';
-
 class SignInPage extends StatefulWidget {
   @override
   _SignInPageState createState() => _SignInPageState();
@@ -104,7 +102,10 @@ class _SignInPageState extends State<SignInPage> {
                                 this.userNameController.text,
                                 this.passwordController_1.text,
                                 this.emailController.text);
+                            DB.writeUsers();
+                            Navigator.of(context).pop();
                           }
+                          // ignore: todo
                           //TODO:Validar los datos
                           //Osea solo que los password sean iguales
                           //Y que haceptes los terminos y condiciones
@@ -157,6 +158,7 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ),
           onTap: () {
+            // ignore: todo
             //TODO:Enviar a la pagina de los terminos y condiciones
             print("Acepto");
           },

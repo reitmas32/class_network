@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class RaisedButton_CN extends StatelessWidget {
   final String label;
   final Color color;

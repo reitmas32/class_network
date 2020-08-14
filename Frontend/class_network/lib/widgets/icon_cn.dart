@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class IconWidget_CN extends StatelessWidget {
   const IconWidget_CN({
     Key key,

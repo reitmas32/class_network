@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class TextField_CN extends StatefulWidget {
   final String label;
   final Icon prefixIcon;
@@ -18,8 +19,8 @@ class TextField_CN extends StatefulWidget {
   _TextField_CNState createState() => _TextField_CNState();
 }
 
+// ignore: camel_case_types
 class _TextField_CNState extends State<TextField_CN> {
-
   bool obscureText;
 
   @override
@@ -41,14 +42,16 @@ class _TextField_CNState extends State<TextField_CN> {
           fillColor: Colors.white,
           prefixIcon: widget.prefixIcon,
           labelText: widget.label,
-          suffixIcon: widget.obscureText ? IconButton(
-            icon: Icon(Icons.remove_red_eye),
-            onPressed: () {
-              setState(() {
-                obscureText = !obscureText;
-              });
-            },
-          ) : null,
+          suffixIcon: widget.obscureText
+              ? IconButton(
+                  icon: Icon(Icons.remove_red_eye),
+                  onPressed: () {
+                    setState(() {
+                      obscureText = !obscureText;
+                    });
+                  },
+                )
+              : null,
           labelStyle: TextStyle(color: Colors.blueAccent, fontSize: 25.0),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.0),

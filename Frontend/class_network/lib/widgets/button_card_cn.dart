@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class ButtonCard_CN extends StatelessWidget {
   final Alignment alignment;
   final ShapeBorder shapeBorder;
