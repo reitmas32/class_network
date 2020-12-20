@@ -7,6 +7,9 @@ import 'package:class_network/widgets/icon_cn.dart';
 import 'package:class_network/widgets/raised_button_cn.dart';
 import 'package:class_network/widgets/text_field_cn.dart';
 
+//HTTP
+import 'package:http/http.dart' as http;
+
 // ignore: todo
 //TODO:Eliminar antes de prduccion
 import 'package:class_network/database/database.dart';
@@ -22,7 +25,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController userNameController;
   TextEditingController passwordController;
   ScrollController controllerScrollView;
-  bool recordarmeFlag;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  bool rememberFlag;
 
   @override
   void initState() {
@@ -33,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     userNameController = TextEditingController();
     passwordController = TextEditingController();
     controllerScrollView = ScrollController();
-    recordarmeFlag = false;
+    rememberFlag = false;
     super.initState();
   }
 
@@ -46,8 +50,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
+      key: _scaffoldKey,
       body: CustomScrollView(
         controller: controllerScrollView,
         slivers: [
@@ -89,10 +94,20 @@ class _LoginPageState extends State<LoginPage> {
                           if (await DB.login(this.userNameController.text,
                                   this.passwordController.text) !=
                               null) {
-                            User user;
+                                if(rememberFlag){
+                                  //print(rememberFlag);
+                                  DB.rememberWrite();
+                                }else{
+                                  //DB.rememberClear();
+                                }
                             Navigator.of(context).pushReplacementNamed(
-                                '/AppPage',
-                                arguments: user);
+                                '/AppPage');
+                          } else {
+                            _scaffoldKey.currentState.showSnackBar(SnackBar(
+                              content:
+                                  Text('Login Faild!!'),
+                              duration: Duration(seconds: 3),
+                            ));
                           }
                         },
                       ),
@@ -106,10 +121,10 @@ class _LoginPageState extends State<LoginPage> {
                       Row(
                         children: [
                           Checkbox(
-                            value: recordarmeFlag,
+                            value: rememberFlag,
                             onChanged: (bool value) {
                               setState(() {
-                                recordarmeFlag = value;
+                                rememberFlag = value;
                               });
                             },
                           ),
@@ -133,5 +148,22 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  void showSnackBar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: const Text('Hello, Coflutter!'),
+      backgroundColor: const Color(0xffae00f0),
+      behavior: SnackBarBehavior.floating,
+      duration: const Duration(seconds: 2),
+      action: SnackBarAction(
+          label: 'Done',
+          textColor: Colors.white,
+          onPressed: () {
+            print('Done pressed!');
+          }),
+    );
+
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 }
