@@ -41,3 +41,21 @@ class HourSchedule {
     };
   }
 }
+
+class Days_CN {
+  static int monday = 0;
+  static int tuesday = 1;
+  static int wednesday = 2;
+  static int thursday = 3;
+  static int friday = 4;
+  static int saturday = 5;
+  static int sunday = 6;
+//TODO: CAMBIAR LOS DIAS
+  static String mondayString = 'Monday';
+  static String tuesdayString = 'Tuesday';
+  static String wednesdayString = 'Wednesday';
+  static String thursdayString = 'Thursday';
+  static String fridayString = 'Friday';
+  static String saturdayString = 'Saturday';
+  static String sundayString = 'Sunday';
+}
