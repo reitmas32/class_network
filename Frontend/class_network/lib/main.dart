@@ -20,12 +20,14 @@ class _AppState extends State<App> {
   @override
   void initState() {
     DB.readUsers();
+    DB.rememberRead();
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
+    
   }
 
   @override

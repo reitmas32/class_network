@@ -21,6 +21,10 @@ class StringsES extends Strings {
       'Subjects': 'Materias',
       //Add Subject
       'AddSubject': 'Nueva Materia',
+      'Add': 'Agregar',
+      'Clear': 'Limpiar',
+      'Subject': 'Materia',
+      'Teacher': 'Profesor',
     };
   }
 }
@@ -44,6 +48,10 @@ class StringsEN extends Strings {
       'Subjects': 'Subjects',
       //Add Subject
       'AddSubject': 'Add Subject',
+      'Add': 'Add',
+      'Clear': 'Clear',
+      'Subject': 'Subject',
+      'Teacher': 'Teacher',
     };
   }
 }

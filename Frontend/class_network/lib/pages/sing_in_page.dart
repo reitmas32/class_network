@@ -18,6 +18,7 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController passwordController_1;
   TextEditingController passwordController_2;
   bool flagConditions;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -45,6 +46,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Builder(
         builder: (context) => CustomScrollView(
           controller: controller,
@@ -77,7 +79,7 @@ class _SignInPageState extends State<SignInPage> {
                       RaisedButton_CN(
                         label: ControllerStrings.getStringValue('SignIn'),
                         color: Colors.blue,
-                        onPressed: () {
+                        onPressed: () async {
                           if (!this.flagConditions) {
                             final snackBar = SnackBar(
                               content: Text(ControllerStrings.getStringValue(
@@ -98,12 +100,18 @@ class _SignInPageState extends State<SignInPage> {
                               this.passwordController_1.text != "" &&
                               this.userNameController.text != "" &&
                               this.emailController.text != "") {
-                            DB.singIn(
+                            bool res = await DB.singIn(
                                 this.userNameController.text,
                                 this.passwordController_1.text,
                                 this.emailController.text);
-                            DB.writeUsers();
-                            Navigator.of(context).pop();
+                            if (res) {
+                              Navigator.of(context).pop();
+                            } else {
+                              _scaffoldKey.currentState.showSnackBar(SnackBar(
+                                content: Text('SigIn Faild!!'),
+                                duration: Duration(seconds: 3),
+                              ));
+                            }
                           }
                           // ignore: todo
                           //TODO:Validar los datos
