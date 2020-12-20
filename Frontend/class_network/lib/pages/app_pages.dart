@@ -1,5 +1,7 @@
+import 'package:class_network/database/database.dart';
 import 'package:class_network/pages/add_subject.dart';
 import 'package:class_network/pages/subjects_page.dart';
+import 'package:class_network/widgets/drawer_cn.dart';
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,9 +14,10 @@ class AppPage extends StatefulWidget {
 
 class _AppPageState extends State<AppPage> {
   int _index;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   void initState() {
-    this._index = 0;
+    this._index = 2;
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -25,6 +28,7 @@ class _AppPageState extends State<AppPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Color.fromARGB(40, 0, 0, 255),
         buttonBackgroundColor: Colors.blueAccent,
@@ -41,14 +45,15 @@ class _AppPageState extends State<AppPage> {
           //Handle button tap
         },
       ),
+      drawer: Drawer_CN(),
       body: Center(
         child: SwipeGestureRecognizer(
           child: IndexedStack(
             index: this._index,
             children: [
               Container(color: Colors.amber),
-              AddSubectPage(),
-              SubjectsPage(),
+              AddSubectPage(scaffoldKey: _scaffoldKey),
+              SubjectsPage(scaffoldKey: _scaffoldKey),
             ],
           ),
           onSwipeLeft: () {
