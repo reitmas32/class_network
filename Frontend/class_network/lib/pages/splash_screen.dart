@@ -1,3 +1,5 @@
+import 'package:class_network/database/database.dart';
+import 'package:class_network/pages/app_pages.dart';
 import 'package:class_network/pages/login_page.dart';
 import 'package:class_network/widgets/icon_cn.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +31,13 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
           context,
           PageRouteBuilder(
             transitionDuration: Duration(seconds: 2),
-            pageBuilder: (_, __, ___) => LoginPage(),
+            pageBuilder: (_, __, ___) {
+              if (DB.remember) {
+                return AppPage();
+              } else {
+                return LoginPage();
+              }
+            },
           ),
         );
       },
