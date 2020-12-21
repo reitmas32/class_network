@@ -28,7 +28,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
-  
+
   http: any 
   path_provider: ^1.6.11
   curved_navigation_bar: ^0.3.3

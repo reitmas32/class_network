@@ -1,7 +1,7 @@
 import 'package:class_network/models/hour_model.dart';
 import 'package:class_network/widgets/raised_button_cn.dart';
 import 'package:date_format/date_format.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 class HourWidget_CN extends StatefulWidget {
