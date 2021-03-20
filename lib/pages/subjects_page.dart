@@ -1,3 +1,5 @@
+import 'package:class_network/database/database.dart';
+import 'package:class_network/models/subject_model.dart';
 import 'package:class_network/util/languge.dart';
 import 'package:class_network/widgets/app_bar_cn.dart';
 import 'package:class_network/widgets/subject_card.dart';
@@ -15,6 +17,14 @@ class SubjectsPage extends StatefulWidget {
 }
 
 class _SubjectsPageState extends State<SubjectsPage> {
+  List<Subject> subjects;
+
+  @override
+  void initState() {
+    this.subjects = DB.subjects;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -30,16 +40,20 @@ class _SubjectsPageState extends State<SubjectsPage> {
           icon: Icons.menu,
         ),
         SliverList(
-          delegate: SliverChildListDelegate([
-            SubjectCard(),
-            SubjectCard(),
-            SubjectCard(),
-            SubjectCard(),
-            SubjectCard(),
-            SubjectCard()
-          ]),
+          delegate: SliverChildListDelegate(_buildSubjects()),
         )
       ],
     );
+  }
+
+  List<SubjectCard> _buildSubjects() {
+    List<SubjectCard> cards = List();
+    for (var subject in subjects) {
+      cards.add(SubjectCard(
+        subject: subject,
+        scaffoldKey: this.widget.scaffoldKey,
+      ));
+    }
+    return cards;
   }
 }

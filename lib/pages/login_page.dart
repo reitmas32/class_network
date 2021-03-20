@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       body: CustomScrollView(
@@ -94,18 +94,19 @@ class _LoginPageState extends State<LoginPage> {
                           if (await DB.login(this.userNameController.text,
                                   this.passwordController.text) !=
                               null) {
-                                if(rememberFlag){
-                                  //print(rememberFlag);
-                                  DB.rememberWrite();
-                                }else{
-                                  //DB.rememberClear();
-                                }
-                            Navigator.of(context).pushReplacementNamed(
-                                '/AppPage');
+                            if (rememberFlag) {
+                              //print(rememberFlag);
+                              DB.rememberWrite();
+                            } else {
+                              //DB.rememberClear();
+                            }
+
+                            await DB.readSubjects();
+                            Navigator.of(context)
+                                .pushReplacementNamed('/AppPage');
                           } else {
                             _scaffoldKey.currentState.showSnackBar(SnackBar(
-                              content:
-                                  Text('Login Faild!!'),
+                              content: Text('Login Faild!!'),
                               duration: Duration(seconds: 3),
                             ));
                           }

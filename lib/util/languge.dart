@@ -25,6 +25,7 @@ class StringsES extends Strings {
       'Clear': 'Limpiar',
       'Subject': 'Materia',
       'Teacher': 'Profesor',
+      'Delete': 'Eliminar',
     };
   }
 }
@@ -52,6 +53,7 @@ class StringsEN extends Strings {
       'Clear': 'Clear',
       'Subject': 'Subject',
       'Teacher': 'Teacher',
+      'Delete': 'Delete',
     };
   }
 }

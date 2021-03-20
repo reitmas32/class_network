@@ -30,8 +30,8 @@ class HourSchedule {
   HourSchedule({this.end, this.init});
 
   HourSchedule.fromJson(Map<String, dynamic> json) {
-    this.init = json['init'];
-    this.end = json['end'];
+    this.init = Hour.fromJson(json['init']);
+    this.end = Hour.fromJson(json['end']);
   }
 
   Map<String, dynamic> toJson() {

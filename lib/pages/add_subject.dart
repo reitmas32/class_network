@@ -99,7 +99,7 @@ class _AddSubectPageState extends State<AddSubectPage> {
             print("Menu in Inbox");
           },
           icon: Icons.menu,
-          separation: 20,
+          separation: 0,
         ),
         SliverList(
           delegate: SliverChildListDelegate([
@@ -122,7 +122,7 @@ class _AddSubectPageState extends State<AddSubectPage> {
           ]),
         ),
         SliverPadding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(10),
           sliver: SliverGrid.count(
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
@@ -140,9 +140,10 @@ class _AddSubectPageState extends State<AddSubectPage> {
                     color: Colors.blue,
                     onPressed: () {
                       setState(() {
-                        print(this.listHourSchedule[0].end.hour);
-                        DB.addSubject(nameSubject.text, nameTeacher.text);
+                        DB.addSubject(nameSubject.text, nameTeacher.text,
+                            this.listHourSchedule);
                       });
+                      Navigator.of(context).pushReplacementNamed('/AppPage');
                     },
                   ),
                   SizedBox(

@@ -54,7 +54,10 @@ class SliverAppBar_CN extends StatelessWidget {
       ),
       Text(
         text,
-        style: TextStyle(fontSize: 25.0),
+        style: TextStyle(
+          fontSize: 25.0,
+        ),
+        overflow: TextOverflow.ellipsis,
       ),
     ];
   }

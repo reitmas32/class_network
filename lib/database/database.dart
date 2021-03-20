@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:class_network/models/hour_model.dart';
 import 'package:class_network/models/subject_model.dart';
 import 'package:class_network/models/user_model.dart';
 import 'package:path_provider/path_provider.dart';
@@ -156,11 +157,19 @@ class DB {
     try {
       Directory dir = await getApplicationDocumentsDirectory();
       File file = File('${dir.path}/subjects.json');
+      List<String> listJson = List();
+      //print(DB.subjects.length);
+
+      for (var sub in subjects) {
+        listJson.add(jsonEncode(sub));
+      }
+
+      //print(jsonEncode(subjects));
       String jsonText = jsonEncode(subjects);
       await file.writeAsString(jsonText);
       done = true;
     } catch (e) {
-      print('$e Error al Guardar');
+      print('$e Error al Guardar subjects');
     }
     return Future<bool>.value(done);
   }
@@ -169,7 +178,7 @@ class DB {
     Future.delayed(Duration(seconds: 1));
     bool done = false;
     try {
-      users.clear();
+      subjects.clear();
       Directory dir = await getApplicationDocumentsDirectory();
       File file = File('${dir.path}/subjects.json');
 
@@ -177,11 +186,14 @@ class DB {
 
       List json = jsonDecode(jsonTextEncode);
       for (var item in json) {
-        subjects.add(Subject.fromJson(item));
+        var subject = Subject.fromJson(item);
+        if (subject.idUser == DB.user.idUser) {
+          subjects.add(subject);
+        }
       }
       done = true;
     } catch (e) {
-      print('$e Error al Leer');
+      print('$e Error al Leer las Subjets');
     }
     return Future<bool>.value(done);
   }
@@ -189,21 +201,37 @@ class DB {
   static Future<bool> addSubject(
     String nameSubject,
     String nameTeacher,
+    List<HourSchedule> schedule,
   ) async {
     Future.delayed(Duration(seconds: 1));
     bool done = false;
     try {
+      var subject = Subject(
+        id: DB.rng.nextInt(100).toString(),
+        idUser: DB.user.idUser,
+        nameSubject: nameSubject,
+        nameTeacher: nameTeacher,
+        schedule: schedule,
+      );
       DB.subjects.add(
-        Subject(
-          id: DB.rng.nextInt(100).toString(),
-          idUser: DB.user.idUser,
-          nameSubject: nameSubject,
-          nameTeacher: nameTeacher,
-        ),
+        subject,
       );
       done = true;
+      DB.writeSubjects();
     } catch (e) {
       print('$e Error al Agregar Subject');
+    }
+    return Future<bool>.value(done);
+  }
+
+  static Future<bool> deleteSubject(Subject subject) async {
+    Future.delayed(Duration(seconds: 1));
+    bool done = false;
+    try {
+      subjects.remove(subject);
+      DB.writeSubjects();
+    } catch (e) {
+      print('$e Error al Eliminar Subject');
     }
     return Future<bool>.value(done);
   }
@@ -240,7 +268,7 @@ class DB {
         DB.remember = true;
       }
     } catch (e) {
-      print('$e Error al Leer');
+      print('$e Error al Leer rememberRead');
     }
     return Future<bool>.value(done);
   }

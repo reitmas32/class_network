@@ -10,7 +10,7 @@ class User {
     this.nameUser = json['nameUser'];
     this.password = json['password'];
     this.email = json['email'];
-    this.email = json['_id'];
+    this.idUser = json['_id'];
   }
 
   Map<String, dynamic> toJson() {

@@ -1,10 +1,14 @@
 import 'dart:math' as math;
 
+import 'package:class_network/models/subject_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:class_network/widgets/button_card_cn.dart';
 
 class SubjectCard extends StatefulWidget {
+  final Subject subject;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  SubjectCard({this.subject, this.scaffoldKey});
   @override
   _SubjectCardState createState() => _SubjectCardState();
 }
@@ -27,15 +31,19 @@ class _SubjectCardState extends State<SubjectCard> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: MediaQuery.of(context).size.height / 4,
-        child: Stack(
-          children: [
-            _buildBackCard(),
-            _buildButtonMarkerSubject(),
-            _buildButtonEditSubject(),
-          ],
+      child: InkWell(
+        child: Container(
+          height: MediaQuery.of(context).size.height / 4,
+          child: Stack(
+            children: [
+              _buildBackCard(),
+            ],
+          ),
         ),
+        onTap: () {
+          Navigator.of(context).pushReplacementNamed('/EditSubjectPage',
+              arguments: {'subject': this.widget.subject});
+        },
       ),
     );
   }
@@ -60,7 +68,7 @@ class _SubjectCardState extends State<SubjectCard> {
 
   Text _buildTextTeacherSubject() {
     return Text(
-      'Nombre Profesor',
+      this.widget.subject.nameTeacher,
       style: TextStyle(
         fontSize: 27.0,
         color: Colors.white,
@@ -70,7 +78,7 @@ class _SubjectCardState extends State<SubjectCard> {
 
   Text _buildTextNameSubject() {
     return Text(
-      'Nombre Materia',
+      this.widget.subject.nameSubject,
       style: TextStyle(
         fontSize: 30.0,
         color: Colors.white,

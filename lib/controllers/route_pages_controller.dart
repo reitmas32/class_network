@@ -1,4 +1,5 @@
 import 'package:class_network/pages/app_pages.dart';
+import 'package:class_network/pages/edit_subject_page.dart';
 import 'package:flutter/material.dart';
 
 //Pages Widgets
@@ -16,6 +17,7 @@ class RoutePagesController {
       '/SignInPage': (context) => SignInPage(),
       '/SubjectsPage': (context) => SubjectsPage(),
       '/AppPage': (context) => AppPage(),
+      '/EditSubjectPage': (context) => EditSubjectPage(),
     };
   }
 }

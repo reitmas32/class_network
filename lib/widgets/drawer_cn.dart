@@ -34,6 +34,7 @@ class Drawer_CN extends StatelessWidget {
               label: 'Salir',
               onPressed: () {
                 DB.rememberClear();
+                //DB.
                 Navigator.of(context).pushReplacementNamed('/LoginPage');
               },
             ),

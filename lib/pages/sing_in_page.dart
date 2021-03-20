@@ -57,6 +57,7 @@ class _SignInPageState extends State<SignInPage> {
                 Navigator.of(context).pop();
               },
               icon: Icons.arrow_back,
+              separation: (MediaQuery.of(context).size.width / 10),
             ),
             SliverList(
               delegate: sliversTextFieelds(),
