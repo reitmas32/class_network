@@ -1,0 +1,97 @@
+[
+    {
+        "id": 96,
+        "idUser": null,
+        "nameSubject": "EDA II",
+        "nameTeacher": "Goku",
+        "key": null,
+        "credits": null,
+        "marker": null,
+        "schedule": [
+            {
+                "init": {
+                    "day": 0,
+                    "minutes": 0,
+                    "seconds": null,
+                    "hour": 7
+                },
+                "end": {
+                    "day": 0,
+                    "minutes": 0,
+                    "seconds": null,
+                    "hour": 9
+                }
+            },
+            {
+                "init": {
+                    "day": 1,
+                    "minutes": null,
+                    "seconds": null,
+                    "hour": null
+                },
+                "end": {
+                    "day": 1,
+                    "minutes": null,
+                    "seconds": null,
+                    "hour": null
+                }
+            },
+            {
+                "init": {
+                    "day": 2,
+                    "minutes": 0,
+                    "seconds": null,
+                    "hour": 7
+                },
+                "end": {
+                    "day": 2,
+                    "minutes": 0,
+                    "seconds": null,
+                    "hour": 9
+                }
+            },
+            {
+                "init": {
+                    "day": 3,
+                    "minutes": null,
+                    "seconds": null,
+                    "hour": null
+                },
+                "end": {
+                    "day": 3,
+                    "minutes": null,
+                    "seconds": null,
+                    "hour": null
+                }
+            },
+            {
+                "init": {
+                    "day": 4,
+                    "minutes": null,
+                    "seconds": null,
+                    "hour": null
+                },
+                "end": {
+                    "day": 4,
+                    "minutes": null,
+                    "seconds": null,
+                    "hour": null
+                }
+            },
+            {
+                "init": {
+                    "day": 5,
+                    "minutes": null,
+                    "seconds": null,
+                    "hour": null
+                },
+                "end": {
+                    "day": 5,
+                    "minutes": null,
+                    "seconds": null,
+                    "hour": null
+                }
+            }
+        ]
+    }
+]
